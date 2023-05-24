@@ -2,6 +2,8 @@ package ru.bul.springs.ForTestingOne.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "position")
@@ -12,9 +14,13 @@ public class Position {
     private int id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(min = 2,max = 100)
     private String name;
 
     @Column(name = "description")
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(min = 2,max = 100)
     private String description;
 
 
