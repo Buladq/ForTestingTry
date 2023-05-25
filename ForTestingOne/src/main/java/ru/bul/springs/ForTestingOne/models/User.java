@@ -36,6 +36,7 @@ public class User {
     private String phoneNumber;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Position position;
 

@@ -24,20 +24,16 @@ public class PositionController {
         this.positionService = positionService;
     }
 
-    @GetMapping
-    public List<Position> getAllPositions(){
-        return positionService.getAll();
-    }
+
 
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> createPosition(@RequestBody @Valid Position position,BindingResult bindingResult){
         positionService.addPosition(position);
-        return ResponseEntity.ok(HttpStatus.OK);
-
+        return ResponseEntity.ok(HttpStatus.CREATED);
 
     }
 
-    @PatchMapping("/uptade/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<HttpStatus> updatePosition(@RequestBody @Valid Position position,BindingResult bindingResult,
                                                      @PathVariable("id")Integer id ){
         positionService.updatePosition(id,position);
@@ -47,9 +43,10 @@ public class PositionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteReview(@PathVariable("id")Integer id){
+    public ResponseEntity<String> deletePosition(@PathVariable("id")Integer id){
         positionService.deletePosition(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return new ResponseEntity<>("Position successfully deleted!", HttpStatus.OK);
+
 
     }
 
