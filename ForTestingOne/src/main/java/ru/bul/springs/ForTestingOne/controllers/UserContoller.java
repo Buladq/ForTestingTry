@@ -54,7 +54,7 @@ public class UserContoller {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<HttpStatus> updatePosition(@RequestBody @Valid User user, BindingResult bindingResult,
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody @Valid User user, BindingResult bindingResult,
                                                      @PathVariable("id")Integer id ){
         userService.updateUser(id,user);
         return ResponseEntity.ok(HttpStatus.OK);
