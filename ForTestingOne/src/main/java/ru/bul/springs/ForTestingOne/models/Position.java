@@ -1,9 +1,12 @@
 package ru.bul.springs.ForTestingOne.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "position")
@@ -24,10 +27,16 @@ public class Position {
     private String description;
 
 
-    public Position(int id, String name, String description) {
+    @OneToMany(mappedBy = "position")
+    @JsonIgnore
+    private List<User> userList;
+
+
+    public Position(int id, String name, String description, List<User> userList) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.userList = userList;
     }
 
     public Position() {
@@ -55,5 +64,13 @@ public class Position {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }
