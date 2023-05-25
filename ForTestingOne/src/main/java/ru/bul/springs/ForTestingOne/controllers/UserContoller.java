@@ -11,6 +11,8 @@ import ru.bul.springs.ForTestingOne.models.Position;
 import ru.bul.springs.ForTestingOne.models.User;
 import ru.bul.springs.ForTestingOne.service.UserService;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,15 +26,17 @@ public class UserContoller {
         this.userService = userService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> allUsersBySort(){
-        return new ResponseEntity<List<User>>(userService.getAllUsers(),
+
+
+    @GetMapping("/getbyposition/{position}")
+    public ResponseEntity<List<User>> allUsersByPosition(@PathVariable("position")String position){
+        return new ResponseEntity<List<User>>(userService.getByPosition(position),
                 HttpStatus.OK);
     }
 
-    @GetMapping("/getbyposition/{position}")
-    public ResponseEntity<List<User>> allUsersBySort(@PathVariable("position")String position){
-        return new ResponseEntity<List<User>>(userService.getByPosition(position),
+    @GetMapping("/getbydateofbirth/{dateofbirth}")
+    public ResponseEntity<List<User>> allUsersByDate(@PathVariable("dateofbirth")LocalDate dateofbirth){
+        return new ResponseEntity<List<User>>(userService.getByDateOfBirth(dateofbirth),
                 HttpStatus.OK);
     }
 

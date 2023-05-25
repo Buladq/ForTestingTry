@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bul.springs.ForTestingOne.models.User;
 import ru.bul.springs.ForTestingOne.repository.UserRepository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +25,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll(Sort.by(Sort.Direction.ASC,"dateOfBirth"));
 
-    }
 
     public List<User> getByPosition(String position){
         return userRepository.getUserByPosition(position);
@@ -50,4 +50,7 @@ public class UserService {
     }
 
 
+    public List<User> getByDateOfBirth(LocalDate localDate) {
+        return userRepository.getByDateOfBirth(localDate);
+    }
 }
