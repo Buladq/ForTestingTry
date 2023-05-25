@@ -4,52 +4,47 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "person")
+public class Person {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "Поле не может быть пустым")
+
     @Column(name = "fullname")
     private String fullName;
 
+    @Column(name = "position")
+    private String position;
+
     @Column(name = "dateofbirth")
-    @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate dateOfBirth;
 
-    @NotEmpty(message = "Поле не может быть пустым")
-    @Email
+
     @Column(name = "email")
     private String email;
 
-    @NotEmpty
+
     @Column(name = "phonenumber")
     private String phoneNumber;
 
-    @ManyToOne
-    @NotNull
-    @JoinColumn(name = "position_id",referencedColumnName = "id")
-    private Position position;
-
-    public User() {
-    }
-
-    public User(int id, String fullName, LocalDate dateOfBirth, String email, String phoneNumber, Position position) {
+    public Person(int id, String fullName, String position, LocalDate dateOfBirth, String email, String phoneNumber) {
         this.id = id;
         this.fullName = fullName;
+        this.position = position;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.position = position;
+    }
+
+    public Person() {
     }
 
     public int getId() {
@@ -66,6 +61,14 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public LocalDate getDateOfBirth() {
@@ -91,13 +94,4 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
 }
